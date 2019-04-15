@@ -1,0 +1,50 @@
+\subsection{Sidebars}
+A sidebar is a self-contained digression that provides additional information in support of the main text.    Sidebars are strongly encouraged since readers find these digressions useful and informative. Place sidebars at the end of the document, starting each one on a new page.
+%
+Every sidebar must be mentioned in the main text using the style 'For details, see ``How Does Fusion Work?'''
+The technique for referencing sidebars in the main body of the text is as follows. The sidebar title is created using the command
+\begin{verbatim} 
+\section[How Does Fusion Work?]{Sidebar: How Does Fusion Work?}
+\label{sidebar-HDFW}.
+\end{verbatim} 
+The text might then include a sentence such as, `See \verb!``\nameref{sidebar-HDFW}"! for more details on techniques that can be used to increase the controller robustness.' You will need to add \verb!\usepackage[draft]{hyperref}! for this to work.
+
+Figures and tables in sidebars are numbered as Figure S1 and Table S1.   If the first sidebar has Figure S1 and Figure S2, then the first figure in the second sidebar is numbered S3.  The same numbering scheme is used for equations and tables that appear in sidebars.  
+To manually label sidebar equations in LaTeX, use \verb!\tag*{\mbox{\rm{S4}}}!. Sidebar equations and figures can be automatically numbered by using the commands listed below.
+ \begin{verbatim} 
+ \setcounter{equation}{0}
+ \renewcommand{\theequation}{S\arabic{equation}}
+ \setcounter{table}{0}
+ \renewcommand{\thetable}{S\arabic{table}}
+ \setcounter{figure}{0}
+ \renewcommand{\thefigure}{S\arabic{figure}}
+\end{verbatim} 
+
+A sidebar can cite references from the bibliography of the main text or it can have its own bibliography using the numbering style \cite{S1,S2}. The same scheme is used for sidebar figures and tables. 
+See ``\nameref{sb:UseofRefs}'' for further details. 
+%
+Sidebar references can be manually numbered as follows.
+\begin{verbatim} 
+\begin{thebibliography}{99}
+\bibitem[S7]{Kailath} T. Kailath, {\em Linear Systems}, Prentice Hall, 1980.
+\bibitem[S8]{Courant} R. Courant and D. Hilbert, {\em Methods of Mathematical 
+Physics}, Interscience, 1953.
+\end{thebibliography}
+\end{verbatim} 
+%
+Sidebar references can also be automatically numbered using these steps:
+\bee
+\item Place each part of the article that is to have a separate bibliography in an include file, with \verb!\bibliography! as the last line. 
+\item Add \verb!\usepackage{chapterbib}!  in the main latex file. 
+\item Run latex and bibtex as usual. 
+\item Comment out the \verb!\usepackage{chapterbib}!  and all \verb!\bibliography! and  \verb!\bibliographystyle! commands. 
+\item Copy the .bbl files into the main latex file. 
+\item  Run latex and comment out duplicate  \verb!\bibitem!  entries in the sidebar bibliographies.
+\item  Relabel the references in the sidebars as  \verb!\bibitem[S1]{...}!. 
+\eee
+
+\subsection{Author Biographies}
+At the end of your article, please include a brief biography of every author.  
+Do not include place or date of birth. Include details of education.  Say ``the B.S. degree,'' not ``his B.S. degree.'' Mention the name of each author only once in each biography.  Do not use bold font for authors’ names. Limit biographies to 200 words.
+Do not include photos in your article, they will be requested at a later date. 
+Include the email and mailing address of only the corresponding author.

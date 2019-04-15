@@ -1,0 +1,113 @@
+\documentclass[letterpaper,12pt,peerreviewca,draftcls]{IEEEtran}
+\usepackage{csm16}
+\usepackage[margin=1in]{geometry}
+\usepackage[nolists,nomarkers,tablesfirst]{endfloat} % put figures at end
+\usepackage{amsmath} % for \eqref
+
+% added for CSMAG only
+\usepackage{url}
+\usepackage{graphicx,xcolor}
+\usepackage{verbatim}% http://ctan.org/pkg/verbatim
+\makeatletter
+\newcommand{\verbatimfont}[1]{\def\verbatim@font{#1}}%
+\makeatother
+\verbatimfont{\ttfamily\small}
+\newcommand{\XX}[1]{{\bf XX #1 XX}}
+\newcommand{\bi}{\begin{itemize}}\newcommand{\ei}{\end{itemize}}
+\newcommand{\be}{\begin{equation}}\newcommand{\ee}{\end{equation}}
+\newcommand{\bee}{\begin{enumerate}}\newcommand{\eee}{\end{enumerate}}
+\newcommand{\bea}{\begin{eqnarray}}\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\beas}{\begin{eqnarray*}}\newcommand{\eeas}{\end{eqnarray*}}
+\newcommand{\bc}{\begin{center}}\newcommand{\ec}{\end{center}}
+%
+\usepackage[left,pagewise]{lineno} 
+\usepackage[english]{babel} 
+\usepackage{blindtext}
+% added for CSMAG only
+
+\title{\huge Methods for Data-driven Model Predictive Control\\
+\Large Application to intelligent building control}
+\author{Achin Jain, Truong X. Nghiem, Manfred Morari, and Rahul Mangharam \\
+	POC: A.\ Jain (achinj@seas.upenn.edu)\\ \today }
+
+\newif\ifPDF \ifx\pdfoutput\undefined\PDFfalse \else\ifnum\pdfoutput > 0\PDFtrue \else\PDFfalse \fi \fi
+\ifPDF 
+\usepackage[pdftex, plainpages = false, colorlinks=true, linkcolor=black, citecolor = green!50!blue, urlcolor = blue, filecolor=black, pagebackref=false, hypertexnames=false,  pdfpagelabels ]{hyperref}
+\fi
+
+\begin{document}
+\maketitle
+\CSMsetup
+\linenumbers \modulolinenumbers[2] % added for CSMAG only
+
+IEEE Control Systems Magazine (CSM) articles are intended to inform the control engineering community of developments in specialized areas of control. Therefore, submissions must strive for high-quality exposition that explains the principal issues and challenges of their applications area. At least some of the introduction must be of a tutorial nature to introduce non-experts to the area of application. CSM papers are intended to be expository, which means that they explain things to nonexperts, assuming knowledge of control and systems theory at the graduate level. The opening section of the article can review the relevant literature. 
+A sidebar can be used to survey the relevant literature. Sidebars are encouraged for self-contained digressions and tutorials.
+
+\section{Preliminary Remarks}
+%\input{quickstart}
+%\input{formatting}
+%\input{figures}
+%\input{references}
+%\input{sidebars}
+\section{Writing Style}
+%\input{style}
+
+\section{Conclusion}
+We hope that these files are useful to you in preparing your submission for IEEE CSM. We again remind you to carefully study the IEEE CSM Author’s Guide. If you have any questions, do not hesitate to contact the Editor-in-Chief Jonathan P. How at jhow@mit.edu.
+
+%\bibliographystyle{biblio/ieee}
+%\bibliography{manifolds}
+\begin{thebibliography}{10}
+\bibitem{LT} Available online (last accessed 4/25/16)\\ \url{http://ieeecss.org/sites/ieeecss.org/files/documents/CSMLatex.zip}	
+\bibitem{BIB} Available online (last accessed 4/25/16)\\ \url{https://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/bibtex}
+\end{thebibliography}
+
+\processdelayedfloats % place endfloats here, before the sidebars
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sidebars % changes numbering scheme
+
+\clearpage
+\newpage
+
+\section[Use of References in a Sidebar]{Sidebar: Use of References in a Sidebar}
+\label{sb:UseofRefs}
+Here is some random text showing how references are handled for a sidebar. 
+%\blindtext[1] 
+Reference \cite{S1} gives one random reference. A basic equation is
+\be f=ma, \label{eq_sb1}
+\ee
+and the impact of \eqref{eq_sb1} is highlighted in Figure~\ref{sb_fig1}. Reference \cite{S2} gives another random reference, but \cite{LT,BIB} are references in the main body of the text that can be cited in the sidebar.
+
+
+\begin{thebibliography}{10}
+	\bibitem[S1]{S1} Random reference number one generated for a sidebar, 2016
+	\bibitem[S2]{S2} Random reference number two generated for a sidebar, 2016
+\end{thebibliography}
+
+\newpage
+\processdelayedfloats % place sidebar endfloats here
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section[Use of Hyphens]{Sidebar: Use of Hyphens}
+\label{sb:UseofHyphens}
+       			
+Note the spelling of these words as single words with no hyphen:  aeroelastic, aeroservoelastic, aimpoint, allpass, axisymmetric, backup, bandpass, bandlimited, bloodstream, breakpoint, buildup, colocated, coprime, countdown, counterclockwise, counterintuitive, counterproductive, crossover, cutoff, deadbeat, deadzone, drivetrain, electromechanical, feedback, feedforward, feedthrough, flyby, gearbox, geartrain, handheld, hardwired, highpass, ingoing, inline, interagent, interarrival, interrelated, liftoff, lightweight, longstanding, lookup, lowpass, multidimensional, multidisciplinary, multilayer, multilevel, multimode, multimodel, multiobjective, multipath, multirate, multiscale, multistage, multistep, multivehicle, narrowband, nonadaptive, nonadditive, noncausal, noncolocated, nonconservative, noncontact, nonconvex, nondestructive, nondeterministic, nondissipative, nonempty, nonequilibrium, nonessential, nonferrous, nonholonomic, nonideal, noninvasive, nonlinear, nonlocal, nonminimum, nonnegative, nonoverlapping, nonrepeating, nonsquare, nonstandard, nonstationary, nontrivial, nonuniform, nonzero, offboard offline, offset, offshoot, offsite, onboard, ongoing, online, onsite, outgoing, overcrowded, overparameterized, passband, piecewise, powertrain, preset, reinvent, rewritten, rolloff, rollover, rollup, roundoff, scaleup, setpoint, setup, shutdown, sideslip, speedup, spinup, startup, subdivision, suboptimal, subregion, subsection, substep, subsystem, swingby, swingup, teamwork, testbed, tradeoff, unidirectional, warmup, workpiece, worldwide.
+       	
+%\clearpage
+%\section{Procedures}
+%\input{proc}
+
+\newpage
+\section{Author Biography}
+Insert the author bios here.
+%\input{author_how}
+
+\end{document}

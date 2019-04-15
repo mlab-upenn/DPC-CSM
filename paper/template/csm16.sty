@@ -1,0 +1,136 @@
+%%
+%% csm.sty 2007/01/24 version 1.12
+%%
+%
+% IEEE Control Systems Magazine LaTeX style file
+% written 2004 by Kent H. Lundberg (klund at mit dot edu)
+% extended 2007 by Jan H. richter (richter at atp dot rub dot de)
+%
+% Must be used in conjunction with class file IEEEtran.cls v1.6b
+% http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
+% (which is functionally equivalent to PaperPlaza's cssconf.cls).
+%
+% Instructions: Begin your document with the following LaTeX commands:
+%
+% \documentclass[letterpaper,12pt,peerreviewca,draftcls]{IEEEtran}
+% \usepackage{csm16}
+% \title{Title}\author{You}
+% \begin{document}
+% \maketitle
+% \CSMsetup
+%
+% For more information, see http://web.mit.edu/klund/www/csm/
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% True doublespacing and half-inch paragraph indents.
+\def\baselinestretch{1.25} \setlength{\parindent}{24pt}
+
+% Turn off section numbering (\section == \section*)
+\setcounter{secnumdepth}{0}
+
+% Resets the list of references and figure captions to be set in
+% normal-size font.  (This approach is a gruesome hack, but you
+% shouldn't be using footnotes in CSM anyway.)
+\renewcommand{\footnotesize}{}
+
+% ``Figure'' instead of ``Fig.''
+% TODO: Need to add bold to section titles
+\makeatletter
+\def\fnum@figure{Figure~\thefigure}
+\makeatother
+
+% Setup macro after \maketitle, including an extra blank line between
+% paragraphs, and simple page numbers (starting with 1) at the bottom of
+% each page.
+\def\CSMsetup{ \setlength{\parskip}{2ex} \setlength{\parindent}{1cm}
+\pagestyle{plain}\thispagestyle{plain} \pagenumbering{arabic} }
+
+% Sidebars
+\newcommand{\sidebars}{
+	\setcounter{equation}{0}
+	\renewcommand{\theequation}{S\arabic{equation}}
+	\setcounter{table}{0}
+	\renewcommand{\thetable}{S\arabic{table}}
+	\setcounter{figure}{0}
+	\renewcommand{\thefigure}{S\arabic{figure}}
+	%\setcounter{definition}{0}
+	%\renewcommand{\thedefinition}{S\arabic{definition}}
+	
+}
+
+% Setup section, subsection, subsubsection,
+% and subsubsubsection formatting
+
+% section
+\makeatletter
+\renewcommand\section{\@startsection
+{section}{1}{0cm}%                      name, level, indent
+{0.1cm}%                                beforeskip
+{0.1cm}%                                afterskip
+%{\centering\scshape\Large\bfseries}}%   typeface
+%{\centering\scshape\large\bfseries}}%   typeface
+{\centering\large\bfseries}}%   typeface, fixed April 23, 2007
+
+% subsection
+\renewcommand\subsection{\@startsection
+{subsection}{2}{0cm}%                   name, level, indent
+{0.1cm}%                                beforeskip
+{0.01cm}%                                afterskip
+{\normalfont\normalsize\bfseries}}%     typeface
+
+% subsubsection
+\renewcommand\subsubsection{\@startsection
+{subsubsection}{3}{0cm}%                name, level, indent
+{0.1cm}%                                beforeskip
+{0.01cm}%                                afterskip
+{\normalfont\normalsize\itshape}}%
+%\bfseries}}%                            typeface
+
+%% The use of deeper section levels is not recommended
+%% subsubsubsection
+%\newcommand\subsubsubsection{\@startsection
+%{subsubsubsection}{4}{0cm}%            name, level, indent
+%{0.2cm}%                               beforeskip
+%{0.5cm}%                               afterskip
+%{\normalfont\normalsize\itshape}}%     typeface
+
+\long\def\@makecaption#1#2{%
+	% test if is a for a figure or table
+	\ifx\@captype\@IEEEtablestring%
+	% if a table, do table caption
+	\normalsize{\normalfont\normalsize {#1.}~ #2}%
+	\@IEEEtablecaptionsepspace
+	% if not a table, format it as a figure
+	\else
+	\@IEEEfigurecaptionsepspace
+	\setbox\@tempboxa\hbox{\normalfont\normalsize {#1.}~ #2}%
+	\ifdim \wd\@tempboxa >\hsize%
+	% if caption is longer than a line, let it wrap around
+	\setbox\@tempboxa\hbox{\normalfont\normalsize {#1.}~ }%
+	\parbox[t]{\hsize}{\normalfont\normalsize \noindent\unhbox\@tempboxa#2}%
+	% if caption is shorter than a line, center
+	\else%
+	\hbox to\hsize{\normalfont\normalsize\hfil\box\@tempboxa\hfil}%
+	\fi\fi}
+\def\thetable{\arabic{table}}
+%\def\thetable{\@Roman\c@table}
+
+\makeatother
+
+% add brackets for sufigure references using subcaption -> Figure 2(a) 
+\usepackage{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+%for subflaot package uses this instead
+%\renewcommand*\thesubfloatfigure{\themainfigure(\alph{subfloatfigure})}
+
+\newcommand\dblquote[1]{\textquotedblleft #1\textquotedblright} 
+\newcommand\sglquote[1]{\textquoteleft #1\textquoteright}
+\newcommand{\CSS}{Control Systems Society (CSS)}
+\newcommand{\IFAC}{ International Federation of Automatic Control (IFAC)}
+\newcommand{\ACC}{American Control Conference (ACC)}
+\newcommand{\CDC}{Conference on Decision and Control (CDC)}
+\newcommand{\ECC}{European Control Conference (ECC)}
+\newcommand{\CCTA}{Conference on Control Technology and Applications (CCTA)}
+\newcommand{\ICRA}{International Conference on Robotics and Automation (ICRA)}

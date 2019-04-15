@@ -1,0 +1,176 @@
+In preparing your article for the IEEE CSM, please note the following guidelines concerning writing style.  IEEE CSM places high emphasis on the quality and precision of exposition.  Articles that are not well written cannot be considered for publication. Many of the guidelines below reflect standard writing practice.  However, a few of these guidelines are specific to IEEE CSM.
+
+\subsection{Tone of Writing}
+Adopt an objective, scientific tone.  It is acceptable to use ``we'' sparingly. Please avoid the vague subject ``one.''  Passive voice is fine and preferable to ``one.''  Do not refer to the reader as ``you.''  Along the same lines, do not use the word ``our.''  Your article is a scientific essay, not a report on what your group possesses.  Be objectively and dispassionately descriptive in referring to ``the testbed'' rather than ``our testbed.''  Refer to your work in the same objective style that you refer to the work of other researchers.
+
+A historical overview can appear in the introduction or a sidebar.  However, reportorial writing in describing the technical results is not allowed.  Do not describe how you developed your results or how and why your research progressed.  In fact, experimental or computational results can usually be described as if they are unfolding in the present with an objective description.  Your article must not be written as a report of your past activities; see the section on Tense.
+
+\subsection{Sentences and Paragraphs}
+Write simply and clearly.  Use clear and simple sentences, and arrange them in logical order.  A good rule of thumb is to try to minimize the use of colons, semicolons, quotation marks, and parentheses.  Please strive for a smooth, linear writing style. 
+\bi
+\item Organize sentences into coherent paragraphs of reasonable length.  A paragraph can be as short as one or two sentences but usually not longer than half of a page.  
+\item  Organize paragraphs into sections, subsections, and subsubsections with common themes.  Give careful consideration to the section/subsection/subsubsection structure of your article. 
+\item A theorem or proposition is a single paragraph. 
+\item Indent every paragraph without exception.   Use an indentation of 1 cm.
+\ei
+Carefully introduce terminology, and use your terminology consistently. Write with precision and clarity.
+
+Use the first part of your introduction to present your area of application to the readers.  Do not assume that readers know anything about your application.  Tell readers about the control issues and challenges that arise and why these issues are relevant to your application.  Use examples to illustrate these issues and challenges.
+
+\subsection{Equations}
+Punctuate every equation as a smooth, integral part of the sentence, using commas and periods as appropriate. That is, punctuate each equation as part of a sentence in a grammatically correct manner.  A comma is used at the end of every equation in a list and use a comma at the end of an equation that is followed by ``where.''   
+
+Do not precede equations with a colon. Do not use the word ``following'' (or the words ``given by'') to introduce an equation.  
+Do number all equations that you need to refer to.  Number equations in the style (1), (2), (3). In Latex this can easily be done using \verb!\eqref{label}!.  Number an equation and refer to the equation by its number rather than writing ``the above equation.''  Do not use a single number to reference multiple equations.  It is better to assign a separate number to each equation.
+%
+Center every displayed equation. Try to avoid including words on the same line as a displayed equation.  
+An exception is ``for all.''  Do not use the mathematical symbols $\forall$ to denote ``for all.''
+%
+Be absolutely sure that every symbol in every equation is precisely defined with appropriate dimensions or units.
+
+A good example is:  It follows from Newton’s second law
+\be
+			f = ma,					
+\ee
+where a denotes acceleration, that force is proportional to mass.  Hence,
+\be
+			a = f/m.				
+\ee
+Note that (1) is an appositive and (2) provides the verb to the sentence.
+
+
+\subsection{Tense}
+It is usually possible to avoid the use of the future tense.  Replace, ``This controller will solve many difficult problems'' with ``This controller can solve many problems.'' Some examples of good tense usage: These rules \textit{are} written for the benefit of \textit{IEEE CSM}.  The experimental results \textit{showed} the applicability of the method in this particular application.  The results of [7] \textit{suggest} that saturation can degrade performance.  The results given in the next section \textit{show} that the plant is nonlinear. 
+
+\subsection{Wordsmithing Suggestions}
+
+Write factually, and err on the side of understatement.  Avoid ``hype,'' that is, hyperbole.  Use the words ``extremely, ``many,'' ``quite,'' and ``very'' sparingly. Do not use the word ``clearly.''
+
+Avoid repetition.  Do not repeat what you have already said.  However, an exception to this rule is that figure captions must be written to summarize and highlight the main points in the text.  Consequently, repetition between the text and figure captions is encouraged.
+
+Avoid rhetorical questions, for which answers are not expected, such as ``What could be more important than solving this problem?'' Avoid asking the reader questions to advance the presentation.
+
+Avoid the word ``important.'' For example, do not say ``It is important for engineers to develop teraflop computers that cost less than US\$100.''  However, it may be acceptable to write, ``Inexpensive teraflop computers are important since they can facilitate real-time weather forecasting.''  However, it is much better to avoid judgments and write, ``Inexpensive teraflop computers can facilitate real-time weather forecasting.''  Let the reader decide whether something is important or not.  
+
+Do not use ``one'' as the subject of a sentence.  OK:  We expect to find that...  \newline 
+Not OK:  One expects to find that... 
+
+Avoid starting sentences with ``There are'' or ``There is.''  Weak:  ``There are many models that are ill conditioned.''  Stronger:  ``Many models are ill conditioned.''
+
+Avoid using the word ``generally'' and the phrase ``in general,'' which means ``often'' or ``usually'' but otherwise is imprecise.
+
+Do not use ``as'' as a synonym for ``because'' or ``since.'' Never use the imprecise phrase ``a number of.''
+
+The correct use of ``a,'' “the,” and ``this'' is challenging, especially for non-native speakers of English.  Think of ``a'' as meaning ``some,'' while ``the'' refers to a specific or unique object.  The adjective ``this'' refers to an object that has already been specified.  Omit ``the'' when used twice in a row such as in ``The inverse and [the] transpose of the matrix A are given by (3) and (4), respectively.''  Despite these simple rules, subtle cases can arise, although with some thought the correct usage usually becomes evident.  In some cases, it is best to use neither ``the'' nor ``a.''  Example: ``The algorithm is based on a colored noise model.  A noise term is included in the state equation.  The process noise w has stationary statistics.  Noise is known to degrade the performance of estimation algorithms.'' 
+
+\subsection{Acronyms and Abbreviations}
+Acronyms are useful for streamlining the text.  Define acronyms at the first opportunity, then use the acronym consistently:  
+``A model reference adaptive controller (MRAC) was used for stabilization.  This MRAC can be used to control uncertain systems.''
+The following rules apply to the use of acronyms.
+\bee
+\item  Define all acronyms except those that represent names of commercial products.  Although MIMO, SISO, and PID are widely used, it is usually a good idea to define these acronyms.
+
+\item  To define an acronym, use the words first, followed by the acronym in parentheses.  ``The nonlinear backstepping (NBS) controller stabilizes the system.''  Do not capitalize the words, just the acronym.
+
+\item  Do not introduce an acronym that is not used subsequently. Avoid introducing an acronym that is subsequently used only one or two times.
+
+\item  Be conservative in introducing acronyms.  The sentence ``The MV for the ODE was used in the MIMO PID FLC'' is painful to read.
+
+\item  Do not use acronyms in a figure caption unless an acronym appears in the figure itself, in which case, redefine the acronym in the caption even if it is already defined in the main text.
+
+\item  Do not use or define an acronym in a section or subsection heading.
+
+\item  It is acceptable to begin a sentence with an acronym.
+
+\item  If you develop a method or testbed, it may be extremely convenient to invent a name for the method or testbed, and refer to the method or testbed by its name.  The name can then be shortened through the use of an acronym, which facilitates the discussion.
+\eee
+
+Do not use ``etc.'' or ``and so forth.''  Do not use ``e.g.'' or ``i.e.''  Replace ``e.g.'' with ``for example,'' ``for instance,'' or ``such as,'' and replace ``i.e.'' with ``that is.'' 
+%
+Do not use ``vs,'' ``viz,'' ``cf,'' ``ca,'' or ``ibid.''
+%
+Do not use ``w.r.t.''  Rather, use ``with respect to.''
+
+Do not use the mathematical symbols $\forall$ to denote ``for all'', backwards $\exists$ to denote ``there exists,'' or $\leftrightarrow$ for ``implies.''  Use English words in mathematical statements.
+
+Use ``U.S.'' as an adjective, and USA for addresses.
+
+
+\subsection{Punctuation}
+Simple, short, and clear sentences can be highly effective.  Semicolons (;) and dashes (--) are fine, but do not overuse them.
+Avoid lists that use bullets ($\bullet$).  A few lists with or without bullets are acceptable from time to time, but try to write in text form.  Your article is not a PowerPoint presentation.
+
+Include the comma preceding ``and'' when referring to more than two items, such as $x$, $y$, and $z$.  Please follow this rule consistently in your article.  Likewise, write $x$, $y$, or $z$. A comma is needed to separate clauses in compound sentences, and this rule is universally followed.  
+%
+Omit the commas surrounding short appositives.  For example, rewrite ``the state variable, $x$, is a vector'' as ``the state variable $x$ is a vector.''
+
+\subsection{Italics, Quotation Marks, Apostrophes, and Bold}
+Italics \textit{can} be used for emphasis, but only very rarely.  
+Use italics for all mathematical variables such as \textit{x} in $y = f(x)$.
+%
+Do not use italics for chemical compounds, atoms, and molecules such as NO and H$_2$O.
+%
+Minimize the use of italics for emphasis and quotation marks for nonstandard language. 
+%
+Unlike the document you are reading, do not use bold font for emphasis.  Bold font can be used for math variables.
+
+\subsection{Hyphens}
+The rules for hyphens are reasonably logical, but somewhat involved.  This section provides examples of usage.
+\textbf{When in doubt, do not use a hyphen}. See ``\nameref{sb:UseofHyphens}'' for a longer list of words spelled without hyphens.
+%
+Use hyphens for multiple modifiers such as ``computer-based synthesis'' or ``Lyapunov-function analysis'' to show that the first word modifies the second word.  The hyphen is also used in common phrases such as ``state-space model,'' ``nonminimum-phase zero,'' and ``first-order systems.''
+
+``John is well known'' does not have a hyphen since ``is well known'' is the predicate.  Likewise, a ``positive-definite matrix'' is hyphenated, whereas ``The matrix is positive definite'' is not hyphenated.   The engineer ran a real-time simulation.  The simulation runs in real time.
+%
+The positive-definite matrix satisfies the Riccati equation.  The solution of the Riccati equation is positive definite.  Note that a hyphen is not used in the predicate.
+%
+
+Use a hyphen in multi-axis, multi-input, and multi-output.
+The following words have hyphens:  all-weather, electro-optical, ground-based, in-flight, off-road, semi-empirical, tip-up.    
+%
+The prefix self requires a hyphen.
+Follow-up and close-up have hyphens.
+Use a hyphen in co-opt, co-owner, re-establish, and re-evaluate.
+
+
+Prefixes such as anti, bi, co, counter, de, ill, in, inter, intra, multi, non, off, on, out, over, post, pre, proto, pseudo, quad, quasi, re, semi, sub, super, trans, tri, under, uni, and well might or might not warrant a hyphen.  
+Likewise, suffixes such as based, by, down, fixed, free, in, ite, less, off, out, up, and wise might or might not warrant a hyphen.  When in doubt, do not use a hyphen.  
+
+Standalone has no hyphen.  
+Do not use a hyphen in coauthor, cochair, codirector, coeditor, cofounder, cooperate, coordinate, cosponsor, cosupervisor, coworker, and reinvent.  
+Unlike the noun versions, the following verbs have no hyphen:  back up, build up, close up, look up, ramp up, roll up, scale up, set up, shut down, speed up, spin up, start up, trade off.  
+
+The following provides some further examples. The system has three degrees of freedom (DOFs).  A six-degree-of-freedom (6DOF) robotic arm is used for the experiment.  Note the singular word “degree” in the latter phrase and the absence of a hyphen in 6DOF. The abbreviations 1D, 2D, and 3D have no hyphen.
+%
+The testbed uses a 3-foot-long table.  The table is 3-feet long.  We use a 6-ft-by-6-ft test fixture.
+%
+
+\subsection{Capitalization}
+When in doubt, use lower case letters.
+%
+Do not capitalize names of technical items.  For example, write ``linear-quadratic,'' but do not write ``Linear-Quadratic.''  Always capitalize acronyms as in ``linear-quadratic (LQ).''
+
+We write ``Editor George Smith'' and ``George Smith is the editor.''  Note the difference in capitalization due to the editor as a title or the name of the position.
+
+Write ac and dc for AC and DC and write cg for CG. Write Matlab and Simulink, not MATLAB and SIMULINK. Capitalize Earth, Moon, Sun, and the names of all of the planets.
+
+\subsection{Units}
+Write units without italics and with a space after the number.  Correct: ``3.57 mm.''  Wrong:  ``3.57mm.''   Wrong:  ``3.57 \textit{mm}."
+%
+IEEE CSM uses ``s'' for second and ``h'' for hour.  Also, use ``l'' (ell) for liter, but be sure that ``l'' is distinguishable from the number ``1'' in the font that you are using.  It is best to use ``\textit{l}'' (script lower-case ``ell'') for liter if possible.
+
+Use ``bit'' for bit. Write ``US\$100'' or ``US\$100 million'' for money.
+%
+Note the use of a hyphen in the units N-m, N-m-s, and kg-m2 and that this style is different from the standard SI style.
+
+
+\subsection{Spelling}
+
+
+The word ``affect'' is a verb.  The word ``effect'' can be either a verb or a noun.  Noise can affect the performance of the algorithm.  The noise has an effect on the performance of the algorithm.  A good leader can effect change in an organization.  Verb, noun, verb.
+
+Watch out for single and double ``ells.''  The system is modeled, and modeling is useful.  The figure is labeled, and labeling is useful.  The vehicle traveled, and is now traveling.  The system is controlled, the poles are canceled, and the instability is due to a cancellation.  These spellings are not completely logical.
+
+IEEE CSM uses ``parameterize'' and ``parameterization,'' but not ``parametrize'' and  ``parametrization.'' IEEE CSM uses queuing, not queueing.
+%
+Replace spellings such as ``analyse, behaviour, centralise, centre, colour, diagonalise, emphasise, generalise,  honour, optimise, practise, recognise, visualise'' with  ``analyze, behavior, center, centralize, color, diagonalize, emphasize, generalize, honor, optimize, practice, recognize, visualize.'' 
