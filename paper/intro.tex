@@ -1,5 +1,112 @@
+Optimal decision making is necessary and safety critical to the success of a wide range of control applications. 
+Consider, for example, the case of autonomous racing. 
+A common design objective for a controller is to minimize lap times while staying on a known track, avoiding collision with other competing cars, and simultaneously keeping below maximum possible acceleration governed by engine power.
+The \textit{decision variables} or degrees of freedom for this controller are the force provided by the engine and steering angle.
+The controller essentially generates a sequence of engine force and steering angle that drive the car along the track in minimum time.
+Another application where optimal decision making plays an important role is of energy management in buildings.
+The design objective for the controller in this case is to minimize energy costs while regulating temperatures in all the rooms so as to keep the occupants comfortable.
+The \textit{decision variables} for this controller include room temperatures, settings of equipments like air handling units and chillers.
+Now actuating the building with these optimized decisions provides cost savings while keeping occupants happy.
+
+\noindent \textbf{What's common in these control applications?}
+A common theme in designing a controller for autonomous racing and optimal energy management is that the best controller is predictive in nature. 
+Such a controller uses a mathematical model of the car or building to predict their behavior in the future. 
+A mathematical model is a set of differential equations that describe the physics behind operation of a phyical system. 
+In the first case, the model predicts precisely how the position and orientation of the car will change on varying the engine force and steering angle, and, in the second case, how the power consumption and measured room temperatures change on varying the temperature setpoints and equipment settings.
+Thus, a model of a physical system allows for planning the system's behavior in the future.
+This technique for control design is called model predictive control (MPC) \cite{Borrelli2017}.
+An MPC controller solves an optimization problem using a mathematical model to optimize the decision variables.
+
+\noindent \textbf{What differentiates these control applications?}
+Although, the general principle of MPC design remains the same in these two applications, the key difference is that designing a controller for minimal lap times is relatively easier than for optimal energy management in buildings.
+The difference arises due to the complexity of mathematical models.
+While in autonomous racing the physics is easier to capture in ordinary differential equations, it is much harder in the case of building operations.
+The theory of vehicle kinematics and dynamics is well understood in the literature \cite{Rajamani2011}.
+There are very few tuning parameters in the standard kinematic or dynamical vehicle models like mass, wheelbase, distance between the center of gravity and wheels, and tire slip angles which all can be easily measured for a given configuration of a racing car.
+Thus, the mathematical model is accurately known except at insanely high speeds when tires are operating at the limits of slipping.
+On the other hand, identifying the mathematical model of a building is a complex process that requires massive engineering effort, expert domain knowledge and periodic retuning making the system identification cost and time prohibitive.
+The modeling complexity in buildings arises due to the nonlinear interaction between a large number of subsystems like variable air volume boxes, air handling units, chiller systems/compressors, air ducts and water loops, etc., with heat and mass flows within the building and with the external environment.
+Thus, the major barrier in developing high fidelity models (white box and grey box) of buildings, is the user expertise, time, and associated high costs required to develop a mathematical model that accurately reflects reality \cite{Sturzenegger2016}.
+This includes the installation cost of retrofitting the building with additional sensors, the cost of training the engineering, commissioning and service personnel required to implement model-based control and the cost of the necessary engineering effort required for constructing a model.
+The modeling difficulty is compounded due to the fact that each building is designed and used in a different way and thus, has to be uniquely modeled.
+
+MPC has been proven to be very powerful for multivariable dynamical systems in the presence of input and output constraints, and forecast of the disturbances.
+With a reasonable forecast of the external disturbances, the mathematical models predict the state of the system in the future and thus a predictive controller based on MPC can act preemptively to provide a desired behavior.
+The caveat is that MPC requires a reasonably \textit{accurate} mathematical model of the system.
+As we have seen, physics-based modeling is not suitable for all applications, especially, building control.
+We therefore need accurate mathematical models at an economical cost in order to deploy MPC at scale.
+This article specifically focuses on different data-driven algorithms based on machine learning that reduce the cost of model development so that the deployment of MPC can be scaled up at a much lower cost in the applications like building control.
+Although models for vehicle dynamics can be improved even further using machine learning \cite{Hewing2018}, but the scope of this article is limited to intelligent building control that requires entirely different set of techniques.
+In general, the algorithms introduced in this article are applicable to physical systems with slow response time.
+
+\subsection{Machine learning for prediction v/s predictive control}
+
+In supervised learning, prediction problems can be classified into either regression or classification.
+The goal is to identify the mapping (henceforth referred to as model) \(f: x \mapsto y\) from features (also called regressors) \(x\) to output \(y\), where the output is \textit{continous} for regression and \textit{discrete} for classification.
+Since,  for controller design, we are interested only in regression, hence forth, output \(y\) will be assumed to be continuous.
+The features \(x\) are typically multi-dimensional.
+We denote different dimensions of \(x\) by \(x_1, x_2, \dots, x_m\) where each \(x_i\) is a scaler.
+The goal in standard machine learning regression is to identify model \(f\) in
+\begin{align}
+y = f\left( x_1, x_2, \dots, x_m \right)
+\label{E:mlmodel}
+\end{align}
+given \(n\) samples \(\{ x_1^j, x_2^j, \dots, x_m^j, y^j \}_{j=1}^{j=n}\).
+Under this setting, for a new observation defined by \(\{ x_1^*, x_2^*, \dots, x_m^* \}\), we can predict \(y^* = f\left( x_1^*, x_2^*, \dots, x_m^* \right) \).
+Note that it is assumed that all \(x_1^*, x_2^*, \dots, x_m^*\) are known.
+
+It is important to note that this standard machine learning procedure for regression is fundamentally different from using machine learning for control synthesis.
+In the former, all the features of the model are known, while in the latter some of the features that are the decision (or control) variables must be optimized in real-time for desired performance.
+To illustrate this, we make two important distinctions for controller design using MPC.
+
+First, model \(f\) is dynamical since \(f\) captures the dynamical behavior of a physical system. This means that output \(y_{t+1}\) at any given time \(t\) depends on the output at previous time steps \(y_{t}, y_{t-1}, \dots, y_{t-\delta}\), where \(\delta\) is the order of autoregression. To learn a dynamical model, if not all, at least some of the previous outputs \( y_{t-1}, y_{t-2}, \dots, y_{t-\delta}\) are often included in the features. Thus, the regression model is modified to
+\begin{align}
+y_{t+1} = f\left( x_1, x_2, \dots, x_m, y_{t}, y_{t-1}, \dots, y_{t-\delta} \right).
+\label{E:mllags}
+\end{align}
+This goes along the idea of recurrent neural networks \cite{Lipton2015} and its derivatives like long short-term memory networks \cite{Hochreiter1997} which have been widely used for timeseries prediction, the difference being we are specifying the memory dependence explicitly.
+The order of autoregression \(\delta\) is a hyperparameter chosen during cross validation.
+
+Second, some of the features in \( x_1, x_2, \dots, x_m \) must be optimized.
+To understand this, we rewrite \eqref{E:mllags} in control theory terminology by replacing features with disturbances \(d\), inputs \(u\) and their corresponding lags
+\begin{align}
+y_{t+1} = f\left( y_{t}, y_{t-1}, \dots, y_{t-\delta_y}, d_{t}, d_{t-1}, \dots, d_{t-\delta_d}, u_{t}, u_{t-1}, \dots, u_{t-\delta_u} \right).
+\label{E:control}
+\end{align}
+In the learning step, we restructure the time series of \(y\), \(d\) and \(u\) obtained from raw sensor data to create data samples at each time instance in the above format.
+For optimal decision making, we use model \eqref{E:control} in MPC problem as follows
+\begin{align}
+& \minimize_{u_{t}, \dots, u_{t+N-1}} \sum_{\tau=0}^{N-1} (y_{t+\tau+1}\!-\!y_{\mathrm{ref}})^2 \!+\! {u_{t+\tau}}^T R {u_{t+\tau}} \label{E:mpc:generic} \\
+& 
+\begin{aligned}
+\st\ \ 
+& y_{t+\tau+1} = f ( y_{t+\tau}, y_{t+\tau-1}, \dots, y_{t+\tau-\delta_y}, d_{t+\tau}, d_{t+\tau-1}, \dots, d_{t+\tau-\delta_d}, \\
+& \qquad\qquad\qquad\qquad u_{t+\tau}, u_{t+\tau-1}, \dots, u_{t+\tau-\delta_u} ), \nonumber \\
+& u_{t+\tau} \in \mathcal{U},  \nonumber
+\end{aligned}
+\end{align}
+where the constraints hold for all \(\tau \in \{0,\dots,N-1\}\).
+While \eqref{E:mpc:generic} is an example of a tracking controller, cost function can be changed depending upon the application.
+Now the goal has shifted from using \eqref{E:control} for only prediction to optimizing some of the features of the model given the output.
+Thus, the control problem is essentially an inversion of machine learning regression once model \(f\) is learned through standard training procedures.
+Note that we have not posed any restrictions on \(f\) so it can be any nonlinear function in general.
+In the following sections, we will sepcifically discusss metrits and demerits when \(f\) is a random forest, Gaussian process or neural network with the help of case studies on building control.
+We elaborate on this notion of inversion of machine learning models in the next section listing practical challenges in bridging machine learning and controls.
+
+The above description of control synthesis is a two step process.
+First a dynamical model is identified using historical data and then the learned model is used in optimization to compute optimal decisions.
+Another approach to designing a controller is to learn control policies directly using data using reinforcement learning (RL), that is the features are directly mapped into control actions.
+In this setting, we learn the functional representation of the form
+\begin{align}
+u_t = f_r \left( y_{t}, y_{t-1}, \dots, y_{t-\delta_y}, d_{t}, d_{t-1}, \dots, d_{t-\delta_d}, u_{t-1}, \dots, u_{t-\delta_u} \right).
+\end{align}
+Model \(f_r\) can be any nonlinear function, for example, a neural network trained using deep reinforcement learning.
+While we have seen many sucessful demonstrations of reinforcement learning, for example, in autonomous driving where convolutional neural network (CNN) are used to map raw pixels from a single front-facing camera directly into steering commands \cite{Bojarski2016}, in robotics where control policy for a robotic manipulator is learned directly from camera images \cite{Levine2016}, reinforcement learning often requires massive amount of data.
+Further, learning by interaction and real-time experiments when a building is occupied limits the use of reinforcement learning.
+This two factors combined pose a serious practical challenge in the application of reinforcement learning for building control.
+
 \begin{itemize}
-	\item physics-based modeling not suitable in applications like building control  
+	\item  
 	\item need for cost reduction in order to deploy MPC at scale  
 	\item this work explores the use of machine learning based models  
 	\item how is machine learning used in a traditional sense?  
@@ -7,10 +114,13 @@
 	\begin{itemize}
 		\item predictive dynamical model
 		\item performance guarantees for control
+		\item distinction with reinforcement learning
 	\end{itemize}
-	\item outline of the work
-	\begin{itemize}
-		\item economic MPC
-		\item what we don't do
-	\end{itemize}
+\end{itemize}
+
+\subsection{Outline of this article}
+
+\begin{itemize}
+	\item economic MPC
+	\item what we don't do
 \end{itemize}

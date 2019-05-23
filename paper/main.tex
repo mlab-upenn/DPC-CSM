@@ -3,7 +3,8 @@
 \usepackage{csm16}
 \usepackage[margin=1in]{geometry}
 \usepackage[nolists,nomarkers,tablesfirst]{endfloat} % put figures at end
-\usepackage{amsmath} % for \eqref
+\usepackage{amsmath}
+\usepackage{achinDefs}
 
 % added for CSMAG only
 \usepackage{url}
@@ -65,7 +66,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{biblio/ieee}
+\newpage
+\bibliographystyle{unsrt}
 \bibliography{csm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,14 +88,14 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
-\newpage
-
-\input{sbexample2}
-
-\newpage
-\processdelayedfloats % place sidebar endfloats here
-\clearpage
+%\clearpage
+%\newpage
+%
+%\input{sbexample2}
+%
+%\newpage
+%\processdelayedfloats % place sidebar endfloats here
+%\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    			
