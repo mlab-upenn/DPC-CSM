@@ -56,27 +56,30 @@ switch solver
     
     case 'ipopt'
         ops = sdpsettings('solver','ipopt','verbose',1);
-        solution=solvesdp(constraints,objective,ops);
-        if ~strcmp(solution.info,'Successfully solved (IPOPT)')
-            display('Problem is: ')
-            solution.info
+        diagnostics=optimize(constraints,objective,ops);
+        if diagnostics.problem ~= 0
+            fprintf('Yalmip error: %s\n', yalmiperror(diagnostics.problem));
         end
         
     case 'cplex'
         ops = sdpsettings('solver','cplex','verbose',0);
-        solution=solvesdp(constraints,objective,ops);
-        if ~strcmp(solution.info,'Successfully solved (CPLEX-IBM)')
-            display('Problem is: ')
-            solution.info
-            return
+        diagnostics=optimize(constraints,objective,ops);
+        if diagnostics.problem ~= 0
+            fprintf('Yalmip error: %s\n', yalmiperror(diagnostics.problem));
+        end
+        
+    case 'gurobi'
+        ops = sdpsettings('solver','gurobi','verbose',0);
+        diagnostics=optimize(constraints,objective,ops);
+        if diagnostics.problem ~= 0
+            fprintf('Yalmip error: %s\n', yalmiperror(diagnostics.problem));
         end
         
     case 'linprog'
         ops = sdpsettings('solver','linprog','verbose',1);
-        solution=solvesdp(constraints,objective,ops);
-        if ~strcmp(solution.info,'Successfully solved (LINPROG)')
-            display('Problem is: ')
-            solution.info
+        diagnostics=optimize(constraints,objective,ops);
+        if diagnostics.problem ~= 0
+            fprintf('Yalmip error: %s\n', yalmiperror(diagnostics.problem));
         end
         
 end

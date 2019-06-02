@@ -1,16 +1,18 @@
 clear
 clc
 
-%% model training
+%% Load data
 
 % set params
 orderAR = 6;
 ctrlHzn = 6;
 
-[xTrain_d, xTrain_c, yTrain] = load_data('train', orderAR, ctrlHzn, 'orig');
+[xTrain_d, xTrain_c, yTrain] = load_data('train', orderAR, ctrlHzn, 'est');
 
 leafsize = 5;
 catcol = 8*ctrlHzn+orderAR+(1:2);
+
+%% model training
 
 % separate regression tree for each output
 models = cell(1,ctrlHzn);
@@ -19,7 +21,7 @@ for idm = 1:ctrlHzn
     'Method', 'regression', 'OOBPred', 'On', 'OOBVarImp', 'on',...
     'CategoricalPredictors', catcol, 'MinLeaf', leafsize+4*idm);
     models{idm} = model;
-    save(['../results/rf-step' num2str(idm) '-N' num2str(ctrlHzn) '.mat'], 'model');
+    save(['results/rf-step' num2str(idm) '-N' num2str(ctrlHzn) '.mat'], 'model');
     disp(idm);
 end
 
@@ -32,7 +34,7 @@ leafmodels = cell(1,ctrlHzn);
 for idm = 1:ctrlHzn
     linmodel = train_linearmodel_in_leaves(models{idm}, xTrain_c, yTrain(:,idm), idm);
     leafmodels{idm} = linmodel;
-    save(['../results/lm-step' num2str(idm) '-N' num2str(ctrlHzn) '.mat'], 'linmodel', '-v7.3');
+    save(['results/lm-step' num2str(idm) '-N' num2str(ctrlHzn) '.mat'], 'linmodel', '-v7.3');
 end
 
 % clearvars -except leafmodels

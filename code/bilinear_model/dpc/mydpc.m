@@ -58,7 +58,7 @@ bineq = [bineq1;bineq2];
 
 switch solver
     
-    case 'cplex'
+    case 'quadprog'
         
         QQ = diag(Q(1,1)*ones(N,1));
         RR = kron(eye(N),R);
@@ -72,7 +72,8 @@ switch solver
         c = C1*QQ*C1'-C1*QQ*xref-xref'*QQ*C1'+xref'*QQ*xref;
         H = blkdiag(H, 0*eye(N)); f = [f; epsc*ones(N,1)];  % add slack
         tic;
-        [U, fval] = cplexqp(H,f',Aineq,bineq,[],[],lb,ub);
+        % [U, fval] = cplexqp(H,f',Aineq,bineq,[],[],lb,ub);
+        [U, fval] = quadprog(H,f',Aineq,bineq,[],[],lb,ub);
         fval = fval+c;
         time = toc;
         iter = 0;
